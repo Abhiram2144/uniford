@@ -6,8 +6,11 @@ import { useSession } from "next-auth/react";
 import emailjs from "@emailjs/browser";
 
 const Register = () => {
+  // setting the error message to an empty string
   const [error, setError] = useState("");
+  // getting the router object for navigation purposes
   const router = useRouter();
+  // getting the session object from the useSession hook
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -17,6 +20,7 @@ const Register = () => {
   }, [sessionStatus, router]);
 
   const isValidEmail = (email: string) => {
+    // checking if the email is valid or not using regular expression
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
@@ -36,6 +40,7 @@ const Register = () => {
     }
 
     try {
+      // sending the email and password to the server
       const res = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -46,15 +51,19 @@ const Register = () => {
           password,
         }),
       });
+      // if the status is 400, it means the email is already registered so we are showing an error message on that case
       if (res.status === 400) {
         setError("This email is already registered");
       }
+      // if the status is 200, it means the email is registered successfully and we are redirecting the user to the login page
       if (res.status === 200) {
+        // sending a welcome email to the user
         const templateParams = {
           to_name : email,
           message : "Welcome to our app!",
           from_name: "abhiram.sathiraju@gmail.com"
         }
+        // sending the email using emailjs
         emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",process.env.NEXT_PUBLIC_EMAILJS_SIGNUP_TEMPLATE_ID || "",templateParams,process.env.NEXT_PUBLIC_EMAILJS_USER_ID).then((res: any) => {
           console.log("Email sent successfully",res);
         }
@@ -63,6 +72,7 @@ const Register = () => {
         });
 
         setError("");
+        // redirecting the user to the login page
         router.push("/login");
       }
     } catch (error) {
@@ -71,6 +81,7 @@ const Register = () => {
     }
   };
 
+  // if the session is loading, we are showing a loading message on the screen
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }

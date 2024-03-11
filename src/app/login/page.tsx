@@ -5,20 +5,30 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import emailjs from "@emailjs/browser";
 const Login = () => {
+
+  // getting the router object for navigation purposes
   const router = useRouter();
+
+  // setting the error message to an empty string
   const [error, setError] = useState("");
+
+  // getting the session object from the useSession hook
   const { data: session, status: sessionStatus } = useSession();
+
+  // setting the email and password to an empty string by using a state hook
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
 
   useEffect(() => {
+    // if the session status is authenticated, we are redirecting the user to the dashboard page
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard");
     }
   }, [sessionStatus, router]);
 
   const isValidEmail = (email: string) => {
+    // checking if the email is valid or not using regular expression
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
@@ -42,13 +52,13 @@ const Login = () => {
       setError("Password is invalid");
       return;
     }
-
+    // sending the email and password to the server for authentication
     const res = await signIn("credentials", {
       redirect: false,
       email,
       password,
     });
-
+    // if the response contains an error, we are showing an error message to the user
     if (res?.error) {
       setError("Invalid email or password");
       if (res?.url) 

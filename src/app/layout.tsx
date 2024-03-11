@@ -22,6 +22,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* The SessionProvider component is a custom component that wraps the entire application. It takes the session object as a prop and provides it to all the components in the application. This is how we can access the session object in the Navbar component. */}
         <SessionProvider session={session}>
           <div className="mx-auto max-w-5xl text-2xl gap-2 mb-10">
             <Navbar />
