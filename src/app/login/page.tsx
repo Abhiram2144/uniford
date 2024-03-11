@@ -102,7 +102,7 @@ const Login = () => {
           <button
             className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
             onClick={() => {
-              signIn("github");
+              signIn("google");
             }}
           >
             Sign In with Google
