@@ -32,3 +32,11 @@ Whenever a user logs in or signs up, an email will be sent using EmailJS. It mig
 
 Deployed Link : https://uniford-eosin.vercel.app/
 
+About the project structure: 
+Components folder consists of a file called Navbar.tsx which has the code of the navbar component. 
+
+Models folder contains all the data models used in this application.
+
+Utils folder  is for helper functions that are used throughout the app It contains of db.js file and SessionProvider.tsx. db.js file is used to connect with the mongodb database and SessionProvider mounts the session on top of the children.
+
+App folder consists of dashboard, login, register and home page. It also has the backend file called api which has the code for authentication using next-auth and the registration of the user. 
