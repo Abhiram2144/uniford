@@ -1,18 +1,34 @@
 
 ## Getting Started
 
-First install the dependencies by using the following commands : 
+First use   ``` npm install``` to set up the npm 
+
+Then install the dependencies by using the following commands : 
 ```
 npm i bcryptjs next-auth @emailjs/browser mongoose
 npm i --save-dev @types/bcryptjs
 ```
+You need to create .env file and it should contain:
+```
+GOOGLE_CLIENT_ID 
+GOOGLE_CLIENT_SECRET 
 
+NEXTAUTH_SECRET 
+NEXTAUTH_URL = http://localhost:3000
 
+MONGO_URL 
+EMAIL_USER 
+EMAIL_PASS 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+NEXT_PUBLIC_EMAILJS_USER_ID 
+NEXT_PUBLIC_EMAILJS_SIGNUP_TEMPLATE_ID 
+NEXT_PUBLIC_EMAILJS_SERVICE_ID 
+NEXT_PUBLIC_EMAILJS_LOGIN_TEMPLATE_ID 
+```
 
-## Deploy on Vercel
+Now run ```npm run dev``` to start the website
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Whenever a user logs in or signs up, an email will be sent using EmailJS. It might take some time so be patient
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deployed Link : https://uniford-eosin.vercel.app/
+
