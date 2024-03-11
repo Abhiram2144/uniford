@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
+  // useSession is a hook provided by next-auth that returns the session object if it exists. If no session exists, it returns null.
   const { data: session }: any = useSession();
   return (
     <div>

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
-
+// Define the User Schema 
 const userSchema = new Schema(
   {
     email: {
@@ -17,4 +17,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+// Export the User model
 export default mongoose.models.User || mongoose.model("User", userSchema);
